@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>demo</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<style>
+*{margin:0;padding:0;}
+.g-doc{overflow:hidden;}
+.m-100{width:100%;overflow:hidden;}
+.btn,.btnA{display:block;margin:5px 3%;line-height:35px;background-color:#05a;border-radius:3px;color:#ffffff;font-size:12px;float:left;width:94%;text-align:center;}
+.m-tip{color:#000;font-size:18px;font-weight:bold;margin:5px 3%;}
+</style>
+</head>
+<body>
+<div class="g-doc" id="Jdoc">
+	<div class="m-100">
+		<a class="btn" data-scheme="pcautobrowser://pcauto.main/?bottom=0&top=0">首页</a>
+		<a class="btn" data-scheme="pcautobrowser://pcauto.article/7598282">文章</a>
+		<a class="btn" data-scheme="pcautobrowser://comment/13285745">评论页【安卓下个版本兼容】</a>
+		
+		<a class="btn" data-scheme="pcautobrowser://pcauto.video/46255">视频</a>
+		
+		<a class="btn" data-scheme="pcautobrowser://pcauto.active/?uri=http://www1.pcauto.com.cn/wap/20160119/test/act.html?isActivity=1&FromApp=1">专题</a>
+
+		<a class="btn" data-scheme="pcautobrowser://pcauto.model/33320?serialid=3524&position=0">车型综述</a>
+		<a class="btn" data-scheme="pcautobrowser://pcauto.model/33320?serialid=3524&position=1">车型参配</a>
+		<a class="btn" data-scheme="pcautobrowser://pcauto.model/33320?serialid=3524&position=2">车型图片</a>
+		<a class="btn" data-scheme="pcautobrowser://pcauto.model/33320?serialid=3524&position=3">车型点评</a>
+
+		<a class="btn" data-scheme="pcautobrowser://bbs-topics/18655">帖子列表</a>
+
+		<a class="btn" data-scheme="pcautobrowser://serialOutline/1633?serialname=速腾&position=0">车系综述【ios serialname没作用：不影响正常功能】</a>
+		<a class="btn" data-scheme="pcautobrowser://serialOutline/1633?serialname=速腾&position=1">车系参配页【ios serialname没作用：不影响正常功能】</a>
+		<a class="btn" data-scheme="pcautobrowser://serialOutline/1633?serialname=速腾&position=2">车系图片页【ios serialname没作用：不影响正常功能】</a>
+		<a class="btn" data-scheme="pcautobrowser://serialOutline/1633?serialname=速腾&position=3">车系优惠页【ios serialname没作用：不影响正常功能】</a>
+		<a class="btn" data-scheme="pcautobrowser://serialOutline/1633?serialname=速腾&position=4">车系点评页【ios serialname没作用：不影响正常功能】</a>
+		<a class="btn" data-scheme="pcautobrowser://serialOutline/1633?serialname=速腾&position=7">车系经销商页【ios serialname没作用：不影响正常功能】</a>
+
+		<a class="btn" data-scheme="pcautobrowser://pcauto.main/?bottom=1&top=0">论坛首页【ios还没做默认打开首页】</a>
+		<a class="btn" data-scheme="pcautobrowser://pcauto.main/?bottom=0&top=13">视频列表【ios还没做默认打开首页】</a>
+		<a class="btn" data-scheme="pcautobrowser://pcauto.main/?bottom=3&top=0">优惠首页【ios还没做默认打开首页】</a>
+		<a class="btn" data-scheme="pcautobrowser://pcauto.main/?bottom=2&top=0">找车页【ios还没做默认打开首页】</a>
+	</div>
+</div>
+
+<!-- <script src="http://js.3conline.com/wap/pcauto/2016/js/callapp.js" charset="utf-8"></script> -->
+<script type="text/javascript">
+function loadCallapp(fn) {
+	fn = fn || function() {};
+	if (window.lib && typeof(window.lib.callapp) != "undefined") {
+		fn();
+	}else {
+		var script = document.createElement("script");
+		script.setAttribute("type", "text/javascript");
+		script.setAttribute("src", "callapp.js");
+		document.getElementsByTagName("head")[0].appendChild(script);
+		script.onload = script.onreadystatechange = function() {
+			var f = script.readyState;
+			if (f && f != "loaded" && f != "complete") return;
+			script.onload = script.onreadystatechange = null;
+			fn();
+		};
+	};
+}
+
+
+
+
+var as = document.querySelectorAll("#Jdoc a");
+for (var i = 0; i < as.length; i++) {
+	(function (m) {
+		as[m].addEventListener("click",function(){
+			var _this = this;
+			loadCallapp(function () {
+				lib.callapp({
+					"scheme":"pcautobrowser",
+					"package":"cn.com.pcauto.android.browser",
+					"schemeUrl":_this.getAttribute("data-scheme"),
+					"dowmloadUrl":"http://www1.pcauto.com.cn/zt/gz20151008/jump/jump-wap.html"
+				});
+			})
+		},false);
+	})(i)
+};
+</script>
+
+
+
+
+
+
+</body>
+</html>

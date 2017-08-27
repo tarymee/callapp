@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>demo</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<style>
+*{margin:0;padding:0;}
+.g-doc{overflow:hidden;}
+.m-100{width:100%;overflow:hidden;}
+.btn,.btnA{display:block;margin:5px 3%;line-height:35px;background-color:#05a;border-radius:3px;color:#ffffff;font-size:12px;float:left;width:94%;text-align:center;}
+.m-tip{color:#000;font-size:18px;font-weight:bold;margin:5px 3%;}
+</style>
+</head>
+<body>
+
+
+
+<div class="g-doc" id="Jdoc">
+	<div class="m-100">
+		<a class="btn" data-scheme="hululiapp://hululi/?act=discover">首页</a>
+
+		<a class="btn" data-scheme="hululiapp://hululi/?act=add_article">发布帖子</a>
+		<a class="btn" data-scheme="hululiapp://hululi/?act=show_article&id=8666">帖子详情</a>
+
+		<a class="btn" data-scheme="hululiapp://hululi/?act=add_sale">发布商品</a>
+		<a class="btn" data-scheme="hululiapp://hululi/?act=show_sale&id=6583">商品详情</a>
+
+		<a class="btn" data-scheme="hululiapp://hululi/?act=add_auction">发布拍品</a>
+		<a class="btn" data-scheme="hululiapp://hululi/?act=show_auction&id=6565">拍品详情</a>
+
+
+		<a class="btn" data-scheme="hululiapp://hululi/?act=message">对话首页</a>
+		<a class="btn" data-scheme="hululiapp://hululi/?act=dialog&id=hululi800101">跟谁聊天页</a>
+
+		<a class="btn" data-scheme="hululiapp://hululi/?act=mine">个人页</a>
+		<a class="btn" data-scheme="hululiapp://hululi/?act=my_share&id=18745">他人页</a>
+
+		<a class="btn" data-scheme="hululiapp://hululi/?act=search">搜索页</a>
+
+		<a class="btn" data-scheme="hululiapp://hululi/?act=discover_tag">类别首页</a>
+		<a class="btn" data-scheme="hululiapp://hululi/?act=discover_tag&id=1">类别页</a>
+
+		<a class="btn" id="aaa">专题webview页面</a>
+
+	</div>
+</div>
+
+
+<!-- <script src="http://js.3conline.com/wap/pcauto/2016/js/callapp.js" charset="utf-8"></script> -->
+<script type="text/javascript">
+function loadCallapp(fn) {
+	fn = fn || function() {};
+	if (window.lib && typeof(window.lib.callapp) != "undefined") {
+		fn();
+	}else {
+		var script = document.createElement("script");
+		script.setAttribute("type", "text/javascript");
+		script.setAttribute("src", "callapp.js");
+		document.getElementsByTagName("head")[0].appendChild(script);
+		script.onload = script.onreadystatechange = function() {
+			var f = script.readyState;
+			if (f && f != "loaded" && f != "complete") return;
+			script.onload = script.onreadystatechange = null;
+			fn();
+		};
+	};
+}
+
+
+
+// document.getElementById("aaa").setAttribute("data-scheme","hululiapp://hululi/?act=webview&url=" + encodeURIComponent("http://192.168.199.53:3000/src/act/1604gx/inapp.html"));
+document.getElementById("aaa").setAttribute("data-scheme","hululiapp://hululi/?act=webview&url=" + encodeURIComponent("http://192.168.199.53:3000/src/act/1604gx/inapp.html"));
+
+
+
+
+
+
+
+/*
+ * 加载js
+ * fn {Function || variable} : 如果该函数或者变量已经定义，则直接调用回调函数；否则加载指定js
+ * src {String}: 要加载的js地址
+ * callback {Function} : js加载完毕后的回调函数
+ */
+function needJS(fn, src, callback) {
+	callback = callback || function() {};
+	if (fn) return callback(false);
+	var scripts = document.___needJS__ || (document.___needJS__ = []);
+	var script = scripts[src] || (scripts[src] = {
+		loaded: false,
+		callbacks: []
+	});
+	if (script.loaded) return callback(false);
+	var cbs = script.callbacks;
+	if (cbs.push(callback) == 1) {
+		var js = document.createElement("script");
+		js.onload = js.onreadystatechange = function() {
+			var st = js.readyState;
+			if (st && st != "loaded" && st != "complete") return;
+			js.onload = js.onreadystatechange = null;
+			script.loaded = true;
+			for (var i = 0; i < cbs.length; i++) cbs[i](true);
+		};
+		js.src = src;
+		document.getElementsByTagName("head")[0].appendChild(js);
+	}
+}
+
+
+
+
+needJS("", "callapp.js", function() {
+	var as = document.querySelectorAll("#Jdoc a");
+	for (var i = 0; i < as.length; i++) {
+		(function (m) {
+			as[m].addEventListener("click",function(){
+				var _this = this;
+				lib.callapp({
+					"scheme":"hululiapp",
+					"package":"cn.hululi.android.browser",
+					"schemeUrl":_this.getAttribute("data-scheme"),
+					"dowmloadUrl":"http://a.app.qq.com/o/simple.jsp?pkgname=cn.hululi.hll"
+				});
+			},false);
+		})(i)
+	};
+})
+
+
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
